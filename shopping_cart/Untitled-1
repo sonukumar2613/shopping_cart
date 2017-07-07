@@ -1,0 +1,67 @@
+<div class='modal-header'>
+                                            <h3 class='modal-title'>Edit Item</h3>
+                                            <button class='close' data-dismiss='modal'>&times;</button>
+                                         </div>
+                                         <div class='modal-body'>
+                                            <div id='form1'>
+                                                <div class='form-group'>
+                                                    <label>Item Title</label>
+                                                    <input type='text' id='item_title' value='$rows[item_title]' class='form-control'>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <lable>Item Description</lable>
+                                                    <textarea class='form-control' id='item_description' value='$rows[item_description]' required></textarea>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <label>Item Category</label>
+                                                    <select class='form-control' id='item_category' required>
+                                                        <option>Select a Category</option> "; 
+                                                         
+                                                   
+                                                            $cat_sql = "SELECT * FROM item_cat";
+                                                            $cat_run = mysqli_query($conn, $cat_sql);
+                                                            while($cat_rows = mysqli_fetch_assoc($cat_run)){
+                                                                $cat_name = ucwords($cat_rows['cat_name']);
+                                                                if($cat_rows['cat_slug']==''){
+                                                                    $cat_slug = $cat_rows['cat_name'];
+                                                                }else{
+                                                                    $cat_slug = $cat_rows['cat_slug'];
+                                                                }
+                                                                if($cat_slug == $rows['item_cat']){
+                                                                    echo "<option selected value='$cat_slug'>$cat_name</option>";
+                                                                }else{
+                                                                    echo "<option value='$cat_slug'>$cat_name</option>";
+                                                                }
+                                                                
+                                                            } 
+                                             echo "</select>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <label>Item Quantity</label>
+                                                    <input type='number' id='item_quantity' value='$rows[item_qty]' class='form-control' required>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <label>Item cost</label>
+                                                    <input type='number' id='item_cost' value='$rows[item_cost]' class='form-control' required>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <label>Item Discount</label>
+                                                    <input type='number' id='item_discount' value='$rows[item_discount]' class='form-control' required>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <label>Item price</label>
+                                                    <input type='number' id='item_price' value='$rows[item_price]' class='form-control' required>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <label>Item Delivery</label>
+                                                    <input type='number' id='item_delivery' value='$rows[item_delivery]' class='form-control'>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <input type='hidden' id='up_item_submit' value='$rows[item_id]'>"; ?> 
+                                                    <button onclick="edit_item();" class='btn btn-primary btn-block'>Edit</button>
+                                              </div>
+                                            </div>
+                                        </div>
+                                        <div class='modal-footer'>
+                                            <div class='btn btn-danger' data-dismiss='modal'>close</div>
+                                        </div>
